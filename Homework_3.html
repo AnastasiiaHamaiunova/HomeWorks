@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+       .unselected{
+            color:black;
+        }
+        .selected{
+            color:red;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Homework3</title>
+</head>
+<body>
+<div id ="mainList">
+    <ul id="list">
+        <li>First element</li>
+        <li>Second element</li>
+        <li>Third element</li>
+        <li>Fourth element </li>
+        <li>fifth element</li>
+    </ul>
+</div>
+<script>
+    function selectedElem() {
+        var allLi = document.getElementsByTagName("li");
+        for(var i = 0; i < allLi.length; i++){
+            allLi[i].removeAttribute("class");
+            allLi[i].setAttribute("class","unselected");
+        }
+
+    }
+    function first() {
+        selectedElem();
+        var firstElem = document.getElementById("list").firstElementChild;
+        firstElem.setAttribute("class", "selected");
+    }
+    function last() {
+        selectedElem();
+        var lastElem = document.getElementById("list").lastElementChild;
+        lastElem.setAttribute("class", "selected");
+    }
+    function prevElement() {
+        var currentElem;
+        var allLi = document.getElementsByTagName("li");
+        for(var i = 0; i < allLi.length; i++){
+            if(allLi[i].className == "selected"){
+                currentElem = allLi[i];
+                break;
+            }
+        }
+
+        selectedElem();
+        if(currentElem!=null) {
+            var prevElem = currentElem.previousElementSibling;
+            if (prevElem == null) {
+                last();
+            }
+            else
+                prevElem.setAttribute("class", "selected");
+        }
+        else
+                last();
+
+    }
+    function nextElement() {
+        var currentElem;
+        var allLi = document.getElementsByTagName("li");
+        for(var i = 0; i < allLi.length; i++){
+            if(allLi[i].className == "selected"){
+                currentElem = allLi[i];
+                break;
+            }
+        }
+
+        selectedElem();
+        if(currentElem !=null) {
+            var nextElem = currentElem.nextElementSibling;
+            if (nextElem == null) {
+                first();
+            }
+            else
+                nextElem.setAttribute("class", "selected");
+        }
+        else
+                first();
+    }
+    function newElem() {
+        var newElement = document.createElement("li");
+        newElement.innerHTML = "New element";
+        document.getElementById("list").appendChild(newElement);
+    }
+    function removeElem() {
+        var lastChild = document.getElementById('list').lastChild;
+        document.getElementById("list").removeChild(lastChild);
+    }
+    function firstNewElem() {
+        var newElem = document.createElement("li"),
+                firstElem = document.getElementById("list").firstElementChild;
+        newElem.innerHTML = "New first element";
+        document.getElementById("list").insertBefore(newElem, firstElem);
+    }
+
+
+</script>
+<p onclick="first()"> выбрать первый элемент</p>
+<p onclick="last()"> выбрать последний элемент</p>
+<p onclick="prevElement()">выбрать предыдущий элемент</p>
+<p onclick="nextElement()">выбрать next элемент</p>
+<p onclick="newElem()">new элемент</p>
+<p onclick="removeElem()">delete элемент</p>
+<p onclick="firstNewElem()">add new first element</p>
+</body>
+</html>
