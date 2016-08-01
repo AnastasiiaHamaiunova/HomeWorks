@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+       .unselected{
+            color:black;
+        }
+        .selected{
+            color:red;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Homework3</title>
+</head>
+<body>
+<div id ="mainList">
+    <ul id="list">
+        <li>First element</li>
+        <li>Second element</li>
+        <li>Third element</li>
+        <li>Fourth element </li>
+        <li>fifth element</li>
+    </ul>
+</div>
+
+<div id = "button">
+<p data-action = "firstElement">Выбрать первый элемент</p>
+<p data-action = "lastElement">Выбрать последний элемент</p>
+<p data-action = "prevElement">Предыдущий элемент</p>
+<p data-action = "nextElement">Следующий элемент</p>
+<p data-action = "newElement">new элемент</p>
+<p data-action = "deleteElement">delete элемент</p>
+<p data-action = "newFirstElement">add new first element</p>
+</div>
+<script>
+	
+	var allButton = document.getElementById ("button");
+	var buttonLength = allButton.children.length;
+	allButton.onclick = handler;
+	
+	function handler(e){
+		var target = e.target;
+		var action = target.getAttribute("data-action"); 
+		if( action == "firstElement"){
+			first();
+		}
+		else if (action == "lastElement"){
+			last();
+		}
+		else if (action == "nextElement"){
+			nextElement();
+			}
+		else if (action == "prevElement"){
+			prevElement();
+		}
+		else if (action = "newElement"){
+			newElem();
+		}
+		else if (action = "deleteElement"){
+			removeElem();
+		}
+		else if (action = "newFirstElement"){
+			firstNewElem();
+		}	
+	}
+    function selectedElem() {
+        var allLi = document.getElementsByTagName("li");
+        for(var i = 0; i < allLi.length; i++){
+            allLi[i].removeAttribute("class");
+            allLi[i].setAttribute("class","unselected");
+        }
+
+    }
+    function first() {
+		selectedElem();		
+        var firstElem = document.getElementById("list").firstElementChild;
+        firstElem.setAttribute("class", "selected");
+    }
+    function last() {
+        selectedElem();
+        var lastElem = document.getElementById("list").lastElementChild;
+        lastElem.setAttribute("class", "selected");
+    }
+    function prevElement() {
+        var currentElem;
+        var allLi = document.getElementsByTagName("li");
+        for(var i = 0; i < allLi.length; i++){
+            if(allLi[i].className == "selected"){
+                currentElem = allLi[i];
+                break;
+            }
+        }
+
+        selectedElem();
+        if(currentElem!=null) {
+            var prevElem = currentElem.previousElementSibling;
+            if (prevElem == null) {
+                last();
+            }
+            else
+                prevElem.setAttribute("class", "selected");
+        }
+        else
+                last();
+
+    }
+    function nextElement() {
+        var currentElem;
+        var allLi = document.getElementsByTagName("li");
+        for(var i = 0; i < allLi.length; i++){
+            if(allLi[i].className == "selected"){
+                currentElem = allLi[i];
+                break;
+            }
+        }
+
+        selectedElem();
+        if(currentElem !=null) {
+            var nextElem = currentElem.nextElementSibling;
+            if (nextElem == null) {
+                first();
+            }
+            else
+                nextElem.setAttribute("class", "selected");
+        }
+        else
+                first();
+    }
+    function newElem() {
+        var newElement = document.createElement("li");
+        newElement.innerHTML = "New element";
+        document.getElementById("list").appendChild(newElement);
+    }
+    function removeElem() {
+        var lastChild = document.getElementById('list').lastChild;
+        document.getElementById("list").removeElementChild(lastChild);
+    }
+    function firstNewElem() {
+        var newElem = document.createElement("li"),
+                firstElem = document.getElementById("list").firstElementChild;
+        newElem.innerHTML = "New first element";
+        document.getElementById("list").insertBefore(newElem, firstElem);
+    }
+</script>
+</body>
+</html>
