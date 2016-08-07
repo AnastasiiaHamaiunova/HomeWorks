@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>back to top</title>
+</head>
+<body>
+<div id="container"></div>
+<button id="button">back to top</button>
+<script>
+    var div = document.getElementById("container");
+    for(var i = 0; i < 100; i++){
+        var p = document.createElement("p");
+        p.innerHTML = "Hello world";
+        div.appendChild(p);
+    }
+    var button = document.getElementById("button");
+    button.addEventListener("click", function(e){
+
+        var i = window.pageYOffset - 1;
+        
+       var i_id = setInterval(function () {
+            window.scrollTo(0, i);
+            i -= 50;
+            if(i < 0)
+            {
+                window.scrollTo(0, 0);
+                clearInterval(i_id);
+            }
+        }, 4);
+    })
+    
+</script>
+</body>
+</html>
