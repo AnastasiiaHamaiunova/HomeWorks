@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework_8</title>
+    <style>
+        #block{
+            height: 50px;
+            width: 50px;
+            background-color: aqua;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="block"></div>
+
+<script>
+    window.addEventListener("load", drag);
+
+    function drag(e) {
+        var divDrad = document.getElementById("block");
+        divDrad.addEventListener("mousedown", blockMove);
+
+        window.addEventListener("mouseup", mouseUp);
+
+        var _x;
+        var _y;
+
+        function mouseUp(e) {
+            window.removeEventListener("mousemove", mouseMove);
+        }
+
+        function mouseMove(e) {
+
+            var x = e.clientX - _x;
+            var y = e.clientY - _y;
+            divDrad.style.left = x + "px";
+            divDrad.style.top = y + "px";
+        }
+
+        function blockMove(e) {
+            _x = e.clientX - divDrad.offsetLeft;
+            _y = e.clientY - divDrad.offsetTop;
+            window.addEventListener("mousemove", mouseMove);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Id and classes</title>
+    <style>
+        /*#id1 {
+            color: red;
+        }
+        div.class1 {
+            color: blue;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        div > div.class1 {
+            color: blue;
+            font-size: 14px;
+            text-decoration: underline;
+        }*/
+    </style>
+</head>
+<body>
+    <h1 class="class1" id="id1" >Title</h1>
+<script>
+    var getId = document.getElementById("id1");
+    getId.style.backgroundColor = "red";
+    getId.style.marginTop = "1px";
+
+    var getClass = document. getElementsByClassName("class1")[0];
+    getClass.classList.add("newClass");
+    getClass.style.cssText = "background: red; margin-top:150px; color: blue; font-size: 14px; text-decoration: underline;";
+    var allStyle = window.getComputedStyle(getClass);
+    console.log(allStyle);
+
+</script>
+
+</body>
+</html>
